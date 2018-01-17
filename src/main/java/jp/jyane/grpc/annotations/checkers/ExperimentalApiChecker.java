@@ -25,13 +25,12 @@ import com.google.errorprone.matchers.Description;
 import com.sun.source.tree.IdentifierTree;
 
 @BugPattern(
-    name = "Internal",
-    summary = "@Internal should not be used in application code",
-    explanation = "@Internal should not be used in application code",
+    name = "ExperimentalApi",
+    summary = "@ExperimentalApi should not be used in application code",
+    explanation = "@ExperimentalApi should not be used in application code",
     severity = SeverityLevel.WARNING
 )
-public final class InternalChecker extends BugChecker implements IdentifierTreeMatcher {
-  private static final String ANNOTATION = "io.grpc.Internal";
+public class ExperimentalApiChecker extends BugChecker implements IdentifierTreeMatcher {
 
   @Override
   public Description matchIdentifier(IdentifierTree identifierTree, VisitorState visitorState) {
