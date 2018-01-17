@@ -19,6 +19,6 @@ public final class InternalChecker extends BugChecker implements IdentifierTreeM
 
   @Override
   public Description matchIdentifier(IdentifierTree identifierTree, VisitorState visitorState) {
-    return describeMatch(identifierTree);
+    return null;
   }
 }
