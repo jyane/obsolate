@@ -9,9 +9,9 @@ import com.google.errorprone.matchers.Description;
 import com.sun.source.tree.IdentifierTree;
 
 @BugPattern(
-    name = "InternalApi",
-    summary = "@InternalApi should not be used in application code",
-    explanation = "@InternalApi should not be used in application code",
+    name = "Internal",
+    summary = "@Internal should not be used in application code",
+    explanation = "@Internal should not be used in application code",
     severity = SeverityLevel.WARNING
 )
 public final class InternalChecker extends BugChecker implements IdentifierTreeMatcher {
