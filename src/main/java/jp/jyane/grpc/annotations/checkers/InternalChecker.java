@@ -16,9 +16,12 @@
 
 package jp.jyane.grpc.annotations.checkers;
 
+import com.google.auto.service.AutoService;
 import com.google.errorprone.BugPattern;
 import com.google.errorprone.BugPattern.SeverityLevel;
+import com.google.errorprone.bugpatterns.BugChecker;
 
+@AutoService(BugChecker.class)
 @BugPattern(
     name = "Internal",
     summary = "@Internal should not be used in application code",
