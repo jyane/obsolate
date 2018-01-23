@@ -16,7 +16,6 @@
 
 package jp.jyane.grpc.annotations.checkers;
 
-import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.errorprone.matchers.Description.NO_MATCH;
 
 import com.google.errorprone.VisitorState;
@@ -41,8 +40,8 @@ abstract class AnnotationChecker extends BugChecker implements IdentifierTreeMat
   private final String basePackage;
 
   AnnotationChecker(String basePackage, String annotationType) {
-    this.annotationType = checkNotNull(annotationType, "annotationType");
-    this.basePackage = checkNotNull(basePackage, "packageName");
+    this.annotationType = annotationType;
+    this.basePackage = basePackage;
   }
 
   /**
