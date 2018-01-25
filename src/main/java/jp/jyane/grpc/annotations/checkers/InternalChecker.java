@@ -26,7 +26,7 @@ import com.google.errorprone.bugpatterns.BugChecker;
     name = "Internal",
     summary = "@Internal should not be used in application code",
     explanation = "@Internal should not be used in application code",
-    severity = SeverityLevel.WARNING
+    severity = SeverityLevel.ERROR
 )
 public final class InternalChecker extends AnnotationChecker {
 
