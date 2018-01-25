@@ -26,7 +26,7 @@ import com.google.errorprone.bugpatterns.BugChecker;
     name = "ExperimentalApi",
     summary = "@ExperimentalApi should not be used in application code",
     explanation = "@ExperimentalApi should not be used in application code",
-    severity = SeverityLevel.WARNING
+    severity = SeverityLevel.ERROR
 )
 public final class ExperimentalApiChecker extends AnnotationChecker {
 
