@@ -30,6 +30,11 @@
     <url>https://github.com/jyane/grpc-java-api-checker</url>
   </scm>
 
+  <issueManagement>
+    <system>GitHub Issues</system>
+    <url>https://github.com/jyane/grpc-java-api-checker/issues</url>
+  </issueManagement>
+
   <dependencies>
     <dependency>
       <groupId>com.google.auto.service</groupId>
