@@ -40,7 +40,7 @@ public class InternalCheckerTest {
         "import java.lang.annotation.Target;",
         "",
         "@Internal",
-        "@Retention(RetentionPolicy.SOURCE)",
+        "@Retention(RetentionPolicy.CLASS)",
         "@Target({",
         "  ElementType.ANNOTATION_TYPE,",
         "  ElementType.CONSTRUCTOR,",
