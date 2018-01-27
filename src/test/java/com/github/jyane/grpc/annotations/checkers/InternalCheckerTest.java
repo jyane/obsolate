@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package jp.jyane.grpc.annotations.checkers;
+package com.github.jyane.grpc.annotations.checkers;
 
 import com.google.errorprone.CompilationTestHelper;
 import org.junit.Before;

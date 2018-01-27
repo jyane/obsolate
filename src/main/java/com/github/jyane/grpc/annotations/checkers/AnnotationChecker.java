@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package jp.jyane.grpc.annotations.checkers;
+package com.github.jyane.grpc.annotations.checkers;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.errorprone.matchers.Description.NO_MATCH;
