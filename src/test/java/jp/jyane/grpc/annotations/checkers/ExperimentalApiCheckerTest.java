@@ -65,8 +65,8 @@ public class ExperimentalApiCheckerTest {
         "@Internal",
         "@Retention(RetentionPolicy.SOURCE)",
         "@Target({",
-        "    ElementType.ANNOTATION_TYPE,",
-        "    ElementType.CONSTRUCTOR,",
+        "   ElementType.ANNOTATION_TYPE,",
+        "   ElementType.CONSTRUCTOR,",
         "   ElementType.FIELD,",
         "   ElementType.METHOD,",
         "   ElementType.PACKAGE,",
@@ -82,7 +82,7 @@ public class ExperimentalApiCheckerTest {
         "",
         "import io.grpc.ExperimentalApi;",
         "",
-        "@ExperimentalApi",
+        "@ExperimentalApi(\"https://example.com/issue\")",
         "public class AnnotatedClass {",
         "  public static final int MEMBER = 42;",
         "  public static int foo() { return 42; }",
@@ -190,7 +190,7 @@ public class ExperimentalApiCheckerTest {
   }
 
   @Test
-  public void positiveInstantiation() {
+  public void positiveInstantiationAndCaptureDescriptionLinkUrl() {
     compiler
         .addSourceLines("example/Test.java",
             "package example;",
@@ -200,7 +200,7 @@ public class ExperimentalApiCheckerTest {
             "",
             "public class Test {",
             "  public static void main(String[] args) {",
-            "    // BUG: Diagnostic contains: ",
+            "    // BUG: Diagnostic contains: https://example.com/issue",
             "    new AnnotatedClass();",
             "  }",
             "}")
