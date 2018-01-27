@@ -35,7 +35,7 @@
             <path>
               <groupId>com.github.jyane</groupId>
               <artifactId>grpc-java-api-checker</artifactId>
-              <version>0.1-SNAPSHOT</version>
+              <version>0.1</version>
             </path>
           </annotationProcessorPaths>
           <!-- You can specify the settings -->
