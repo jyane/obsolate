@@ -31,6 +31,7 @@ import com.sun.source.tree.IdentifierTree;
 import com.sun.source.tree.MemberSelectTree;
 import com.sun.source.tree.Tree;
 import com.sun.tools.javac.code.Symbol;
+import java.util.Optional;
 import javax.lang.model.element.AnnotationMirror;
 
 abstract class AnnotationChecker extends BugChecker implements IdentifierTreeMatcher,
@@ -48,17 +49,17 @@ abstract class AnnotationChecker extends BugChecker implements IdentifierTreeMat
   /**
    * Returns true if api is annotated.
    */
-  private boolean isAnnotatedApi(Symbol symbol) {
+  private Optional<AnnotationMirror> findAnnotatedApi(Symbol symbol) {
     if (symbol == null) {
-      return false;
+      return Optional.empty();
     }
     for (AnnotationMirror annotation : symbol.getAnnotationMirrors()) {
       if (annotation.getAnnotationType().toString().equals(annotationType)) {
-        return true;
+        return Optional.of(annotation);
       }
     }
     // recursive
-    return isAnnotatedApi(symbol.owner);
+    return findAnnotatedApi(symbol.owner);
   }
 
   /**
@@ -69,11 +70,12 @@ abstract class AnnotationChecker extends BugChecker implements IdentifierTreeMat
     if (!shouldBeChecked || symbol == null) {
       return NO_MATCH;
     }
-    if (!isAnnotatedApi(symbol)) {
-      return NO_MATCH;
-    }
-    return describeMatch(tree);
+    return findAnnotatedApi(symbol)
+        .map(x -> describe(tree, x))
+        .orElse(NO_MATCH);
   }
+
+  protected abstract Description describe(Tree tree, AnnotationMirror annotation);
 
   @Override
   public Description matchIdentifier(IdentifierTree tree, VisitorState state) {
