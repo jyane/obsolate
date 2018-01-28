@@ -1,4 +1,4 @@
-package com.example.grpc;
+package com.example;
 
 import io.grpc.InternalStatus;
 import io.grpc.Grpc;
