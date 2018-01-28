@@ -34,5 +34,5 @@ configurations.errorprone {
 
 compileJava {
   // you can specify the settings
-  options.compilerArgs += ["-Xep:ExperimentalApi:ERROR", "-Xep:ExperimentalApi:ERROR"]
+  options.compilerArgs += ["-Xep:Internal:ERROR", "-Xep:ExperimentalApi:ERROR"]
 }
