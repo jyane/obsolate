@@ -46,20 +46,18 @@ abstract class AnnotationChecker extends BugChecker implements IdentifierTreeMat
     this.basePackage = checkNotNull(basePackage, "packageName");
   }
 
-  /**
-   * Returns true if api is annotated.
-   */
-  private Optional<AnnotationMirror> findAnnotatedApi(Symbol symbol) {
+  // traverse symbol
+  private Optional<AnnotationMirror> traverseForFindingAnnotations(Symbol symbol, String fullQualifiedAnnotationName) {
     if (symbol == null) {
       return Optional.empty();
     }
     for (AnnotationMirror annotation : symbol.getAnnotationMirrors()) {
-      if (annotation.getAnnotationType().toString().equals(annotationType)) {
+      if (annotation.getAnnotationType().toString().equals(fullQualifiedAnnotationName)) {
         return Optional.of(annotation);
       }
     }
     // recursive
-    return findAnnotatedApi(symbol.owner);
+    return traverseForFindingAnnotations(symbol.owner, fullQualifiedAnnotationName);
   }
 
   /**
@@ -70,7 +68,12 @@ abstract class AnnotationChecker extends BugChecker implements IdentifierTreeMat
     if (!shouldBeChecked || symbol == null) {
       return NO_MATCH;
     }
-    return findAnnotatedApi(symbol)
+    Optional<AnnotationMirror> generated =
+            traverseForFindingAnnotations(symbol, "javax.annotation.Generated");
+    if (generated.isPresent()) {
+      return NO_MATCH;
+    }
+    return traverseForFindingAnnotations(symbol, annotationType)
         .map(x -> describe(tree, x))
         .orElse(NO_MATCH);
   }
