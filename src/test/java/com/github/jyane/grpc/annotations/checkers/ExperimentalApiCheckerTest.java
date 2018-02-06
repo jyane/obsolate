@@ -126,6 +126,36 @@ public class ExperimentalApiCheckerTest {
         "@ExperimentalApi",
         "public interface IAnnotated {",
         "}");
+
+    compiler.addSourceLines("com/example/Greeter.java", 
+        "package com.example;",
+        "",
+        "import io.grpc.ExperimentalApi;",
+        "",
+        "@javax.annotation.Generated(",
+        "    value = \"by gRPC proto compiler\",",
+        "    comments = \"Source: services.proto\"",
+        ")",
+        "public class Greeter {",
+        "  @ExperimentalApi",
+        "  public static int Foo = 42;",
+        "}");
+  }
+
+  @Test
+  public void negativeWhenOwnerIsGeneratedCode() {
+    compiler
+        .addSourceLines("example/Test.java",
+            "package example;",
+            "",
+            "import com.example.Greeter;",
+            "",
+            "public class Test {",
+            "  public static void main(String args[]) {",
+            "    System.out.println(Greeter.Foo);",
+            "  }",
+            "}")
+        .doTest();
   }
 
   @Test
